@@ -1,0 +1,10 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}First Iteration: Implementation of Mappings}{1}{section.1}%
+\contentsline {section}{\numberline {2}Second Iteration: Implementation of Modifiers}{2}{section.2}%
+\contentsline {section}{\numberline {3}Third Iteration: Reduction of Nested Mappings}{2}{section.3}%
+\contentsline {section}{\numberline {4}Fourth Iteration: Implementation of \texttt {payable} in Functions}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Concerns about \texttt {payable} in Functions}{3}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Fifth Iteration: Implementation of Linked Lists}{3}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{3}{section.6}%
+\contentsline {section}{\hspace *{-\tocsep }References}{5}{figure.caption.6}%
+\contentsfinish 

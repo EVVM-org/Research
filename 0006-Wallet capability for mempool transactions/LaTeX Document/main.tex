@@ -1,0 +1,468 @@
+\documentclass[fleqn,10pt]{olplainarticle}
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+
+\usepackage{enumitem}
+
+\usepackage{float}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multicol}
+
+\usepackage{lscape}
+\usepackage{makecell}
+
+\usepackage{color}
+\usepackage{colortbl}
+
+\usepackage{pgfplots}
+
+\usepackage{xurl}
+
+\input{solidity-highlighting.tex}
+
+
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+% Use option lineno for line numbers 
+
+\title{Wallet capability for mempool transactions}
+
+\author[1]{jistro.eth,~~~ariutokintumi.eth}
+%\author[2]{}
+%\affil[1]{Address of first author}
+%\affil[2]{Address of second author}
+
+\keywords{EVM, Blockchain}
+
+
+\begin{abstract}
+The objective of this research what wallet can be useful for mempool transactions.
+\end{abstract}
+
+\begin{document}
+
+\flushbottom
+\maketitle
+\thispagestyle{empty}
+
+\tableofcontents
+
+\section{Wallet Criteria}
+
+To assess the suitability of a wallet for integration within the protocol, the following criteria have been established:
+
+\begin{itemize}[noitemsep]
+	\item Custom Nonce and Gas Fee Configuration
+	\begin{itemize}[noitemsep, nolistsep]
+		\item Users should have the capability to set a custom nonce and gas fee directly from the wallet interface.
+		\item Alternatively, the wallet should support the configuration of nonce and gas fees through a decentralized application (DApp).
+	\end{itemize}
+\end{itemize}
+
+This criterion ensures the flexibility of the wallet in adjusting transaction parameters, providing users with direct control or enabling configuration through our protocol.
+
+To identify wallets meeting these criteria, we compiled a list from various sources \cite{walletconnect_explorer_nodate}, evaluating their compatibility with our established criteria.
+
+For the DApp, we implemented two versions: one utilizing WalletConnect and Ethers.js, and the other solely relying on Web3.js. This approach allows us to explore different integration methods and assess their respective advantages within the context of our criteria.
+
+
+\section{Hot Wallets for Web Browser / Desktop}
+
+\subsection{Metamask}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+Despite Metamask allowing users to configure custom gas fees, it currently lacks the functionality for setting a custom nonce directly from the wallet interface. The DApp approach, as observed, generates an incorrect nonce, even if the number is registered in the transaction header. This issue has been reported since 2023 by Ariutokintumi \cite{ariutokintumi_BugReceived_2023}.
+
+\subsection{Trust Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{green}{\cmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+While Trust Wallet provides the functionality to set a custom nonce and configure gas fees, it cannot be used for our purposes. During testing on the testnet, the configured settings did not reflect accurately. Furthermore, on the mainnet, even when the configuration is displayed correctly, confirming the transaction results in an error message stating \texttt{x is not a valid digit for number system with base 10}. This issue renders Trust Wallet unsuitable for our intended use.
+
+\subsection{Rainbow Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+While Rainbow Wallet offers a user-friendly interface for the average user, it lacks the capability to manually or programmatically set features such as custom networks, custom nonce, and gas fee configurations. This limitation makes Rainbow Wallet unsuitable for our intended use.
+
+\subsection{Zerion}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+While Rainbow Wallet offers a user-friendly interface for the average user, it lacks the capability to manually or programmatically set features such as custom networks, custom nonce, and gas fee configurations. This limitation makes Rainbow Wallet unsuitable for our intended use.
+
+\subsection{Bitget wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{green}{\cmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+While it is possible to manually set up a custom nonce or gas fee configuration, the inability to set up these features programmatically renders Bitget Wallet unsuitable for our purposes.
+
+\subsection{OKX wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Token Poket}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Exodus}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Exodus is notably restrictive in its customization options, lacking the ability to configure custom nonce and gas fees. Even for custom ERC20 tokens, the wallet remains inflexible. As such, it is not suitable for our requirements.
+
+
+\subsection{MEW wallet / Enkrypt wallet }
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Onto wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Math wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+The interface of Math Wallet is overly complex and confusing, limiting transaction options to only three types of transaction fees. As it does not provide the functionality for custom nonce and gas fee configuration, it is not suitable for our requirements.
+
+\subsection{Internet Money wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Coin97}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Frontier}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}]  Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Brave Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+While the Brave Wallet, integrated within the Brave browser, allows for custom gas fee configuration, it lacks the functionality to set a custom nonce programmatically. This limitation renders it unsuitable for our purposes.
+
+\subsection{Opera Crypto Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Similar to the Brave Wallet but in opera, this wallet lacks the ability to set custom nonce and gas fee configurations. Additionally, its interface is confusing and overly limited in functionality. As a result, it is not suitable for our requirements.
+
+\subsection{Cypher}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Rabby wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+While Rabby Wallet incorporates safety precautions for typical users, it lacks the functionality we require. Therefore, it is unsuitable for our purposes.
+
+\subsection{Block wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{SAFE}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Core wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+The official wallet for Avalanche c-chain, the Core Wallet does not provide the functionality we require. However, in a conversation on February 2nd 2024, we discussed this issue with the Avalanche team. They have expressed interest in discussing a potential future implementation to address our requirements with the development team behind the wallet. As of now, it remains unsuitable for our purposes.
+
+\subsection{Taho}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Frame}
+Usability: \textcolor{green}{Can be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{green}{\cmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+Frame offers the functionality we require, allowing users to configure custom nonce and gas fees. However, it is important to note that Frame is a desktop wallet, and its integration with DApps requires the use of a browser extension that facilitates injected connections.
+
+\subsection{Coinbase wallet}
+Usability: \textcolor{green}{Can be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{green}{\cmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+Coinbase Wallet provides the functionality we require, enabling users to configure custom nonce and gas fees. However, it is worth noting that the custom nonce feature may appear hidden within the transaction interface. Despite this, the behavior aligns with our expectations.
+
+\subsection{Phantom wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{One Key}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Despite being an open-source wallet, One Key does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Oisy wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Utilizing an Internet Computer Protocol (ICP) canister for the implementation of an Ethereum Virtual Machine (EVM) wallet, Oisy Wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Infinity wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+For desktop only, no additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\section{Hot Wallets for Mobile devices}
+Due to accessibility limitations on Apple devices, the next phase of our investigation will focus on assessing Android applications.
+
+
+\subsection{Metamask}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+It currently lacks the functionality to set a custom nonce or gas fee programmatically from the wallet interface. Therefore, it is unsuitable for our purposes.
+
+\subsection{Trust Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}]  Custom Nonce
+	\item [\textcolor{red}{\xmark}]  Custom Gas Fee Configuration
+\end{itemize}
+While Trust Wallet provides the functionality to set a custom nonce and configure gas fees, it cannot be used for our purposes. During testing on the testnet, the configured settings did not reflect accurately. Furthermore, on the mainnet, even when the configuration is displayed correctly, confirming the transaction results in an error message stating \texttt{x is not a valid digit for number system with base 10}. This issue renders Trust Wallet unsuitable for our intended use.
+
+\subsection{Rainbow wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+While Rainbow Wallet offers a user-friendly interface for the average user, it lacks the capability to manually or programmatically set features such as custom networks, custom nonce, and gas fee configurations. This limitation makes Rainbow Wallet unsuitable for our intended use.
+
+\subsection{Uniswap wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{Zerion Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{imToken Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+While imToken Wallet allows for the manual configuration of custom gas fees within the app, it lacks the functionality to programmatically set a custom gas fee. Additionally, it does not offer the ability to set a custom nonce. Therefore, it is unsuitable for our purposes.
+
+\subsection{Spot wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Spot Wallet is not suitable for our purposes due to its impending deprecation in January 2024. Even if the app were usable (which it is not), it would become unsafe by February 2024. Therefore, it is unsuitable for our requirements.
+
+\subsection{Bitdet wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}]  Custom Gas Fee Configuration
+\end{itemize}
+Despite offering the functionality to configure manually custom gas fees, Bitdet Wallet lacks the ability to set custom nonce. Additionally, its confusing custom chain configuration renders it unsuitable for our requirements.
+
+\subsection{Crypto.com wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{OKX wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+OKX Wallet presents the same limitations as its web extension counterpart, lacking both custom nonce and gas fee configuration. Therefore, it is not suitable for our purposes.
+
+\subsection{Token Poket}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Despite its well-designed interface as the web extension, Token Pocket does not meet our requirements as it lacks both custom nonce and gas fee configuration capabilities. Therefore, it is not suitable for our purposes.
+
+\subsection{Frontier}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Frontier app restricts users to using only the chains it was designed for and enforces the use of ''safest'' gas configurations. This limitation renders it unsuitable for our purposes.
+
+\subsection{Omni web3 wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+\subsection{1inch wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+While 1inch Wallet allows for custom gas fee configuration, it lacks the functionality to set custom nonce. Therefore, it is unsuitable for our purposes.
+
+\subsection{Exodus}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+Exodus, like its web extension counterpart, is very limited in functionality. It lacks the ability to set custom nonce and gas fee configuration, making it unsuitable for our purposes. Additionally, even the tokens displayed in the interface are limited. Therefore, it does not meet our requirements.
+
+\subsection{Coinbase Wallet}
+Usability: To be confirm
+\begin{itemize}[noitemsep, nolistsep]
+	\item [?] Custom Nonce
+	\item [\textcolor{green}{\cmark}] Custom Gas Fee Configuration
+\end{itemize}
+While it appears that Coinbase Wallet allows for programmable gas fee configuration, the visibility of custom nonce settings is unclear from the interface. Further investigation is required to confirm whether this wallet meets our requirements.
+
+\subsection{Alpha wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{green}{\cmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+While Alpha Wallet allows for custom nonce configuration, it does not respect custom gas fee configurations. Therefore, it is not suitable for our purposes.
+
+\subsection{ONTO wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+ONTO Wallet requires phone permissions and allows users to send ETH/ERC20 using their linked phone number, which deviates from our requirements. Additionally, it lacks the functionality for custom nonce and gas fee configuration. Therefore, it is unsuitable for our purposes.
+
+\subsection{Obvious Smart Wallet}
+Usability: \textcolor{red}{Cannot be used}
+\begin{itemize}[noitemsep, nolistsep]
+	\item [\textcolor{red}{\xmark}] Custom Nonce
+	\item [\textcolor{red}{\xmark}] Custom Gas Fee Configuration
+\end{itemize}
+No additional comments are necessary. The wallet does not offer the functionality we are seeking and is therefore unsuitable for our purposes.
+
+
+\newpage
+\bibliography{citations}
+
+\end{document}  

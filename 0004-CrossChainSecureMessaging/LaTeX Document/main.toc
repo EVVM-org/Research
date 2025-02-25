@@ -1,0 +1,8 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Cross-chain Solutions}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Axelar}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Hyperlane Implementation}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Chainlink CCIP}{2}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Layer Zero}{3}{section.2}%
+\contentsline {section}{\hspace *{-\tocsep }References}{5}{table.caption.5}%
+\contentsfinish 

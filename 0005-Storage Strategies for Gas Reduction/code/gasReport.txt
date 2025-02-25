@@ -1,0 +1,68 @@
+Compiling 1 files with 0.8.20
+Solc 0.8.20 finished in 1.45s
+Compiler run [32msuccessful![0m
+
+Running 5 tests for test/Approach.t.sol:ApproachTest
+[32m[PASS][0m test_FifthApproach() (gas: 1152284039)
+[32m[PASS][0m test_FirstApproach() (gas: 964337427)
+[32m[PASS][0m test_FourthApproach() (gas: 962727232)
+[32m[PASS][0m test_SecondApproach() (gas: 963447165)
+[32m[PASS][0m test_ThirdApproach() (gas: 991847630)
+Test result: [32mok[0m. [32m5[0m passed; [31m0[0m failed; [33m0[0m skipped; finished in 1.77s
+| src/FifthApproach.sol:FifthApproach contract |                 |       |        |       |         |
+|----------------------------------------------|-----------------|-------|--------|-------|---------|
+| Deployment Cost                              | Deployment Size |       |        |       |         |
+| 269536                                       | 1383            |       |        |       |         |
+| Function Name                                | min             | avg   | median | max   | # calls |
+| addNode                                      | 25369           | 45267 | 45269  | 45269 | 10001   |
+| entryAdd                                     | 1045            | 1045  | 1045   | 1045  | 10000   |
+| entrySub                                     | 1067            | 1067  | 1067   | 1067  | 10000   |
+
+
+| src/FirstApproach.sol:FirstApproach contract |                 |       |        |       |         |
+|----------------------------------------------|-----------------|-------|--------|-------|---------|
+| Deployment Cost                              | Deployment Size |       |        |       |         |
+| 135383                                       | 708             |       |        |       |         |
+| Function Name                                | min             | avg   | median | max   | # calls |
+| entryAdd                                     | 945             | 945   | 945    | 945   | 10000   |
+| entryGet                                     | 725             | 725   | 725    | 725   | 10003   |
+| entryInit                                    | 22752           | 22752 | 22752  | 22752 | 10000   |
+| entrySub                                     | 923             | 923   | 923    | 923   | 10000   |
+
+
+| src/FourthApproach.sol:FourthApproach contract |                 |       |        |       |         |
+|------------------------------------------------|-----------------|-------|--------|-------|---------|
+| Deployment Cost                                | Deployment Size |       |        |       |         |
+| 125171                                         | 657             |       |        |       |         |
+| Function Name                                  | min             | avg   | median | max   | # calls |
+| entryAdd                                       | 899             | 899   | 899    | 899   | 10000   |
+| entryGet                                       | 703             | 703   | 703    | 703   | 10003   |
+| entryInit                                      | 22706           | 22706 | 22706  | 22706 | 10000   |
+| entrySub                                       | 877             | 877   | 877    | 877   | 10000   |
+
+
+| src/SecondApproach.sol:SecondApproach contract |                 |       |        |       |         |
+|------------------------------------------------|-----------------|-------|--------|-------|---------|
+| Deployment Cost                                | Deployment Size |       |        |       |         |
+| 125171                                         | 657             |       |        |       |         |
+| Function Name                                  | min             | avg   | median | max   | # calls |
+| entryAdd                                       | 923             | 923   | 923    | 923   | 10000   |
+| entryGet                                       | 703             | 703   | 703    | 703   | 10003   |
+| entryInit                                      | 22730           | 22730 | 22730  | 22730 | 10000   |
+| entrySub                                       | 901             | 901   | 901    | 901   | 10000   |
+
+
+| src/ThirdApproach.sol:ThirdApproach contract |                 |       |        |       |         |
+|----------------------------------------------|-----------------|-------|--------|-------|---------|
+| Deployment Cost                              | Deployment Size |       |        |       |         |
+| 223463                                       | 1148            |       |        |       |         |
+| Function Name                                | min             | avg   | median | max   | # calls |
+| entryAdd                                     | 1621            | 1621  | 1621   | 1621  | 10000   |
+| entryGet                                     | 1412            | 1412  | 1412   | 1412  | 10003   |
+| entryInit                                    | 23455           | 23455 | 23455  | 23455 | 10000   |
+| entrySub                                     | 1599            | 1599  | 1599   | 1599  | 10000   |
+
+
+
+ 
+Ran 1 test suites: [32m5[0m tests passed, [31m0[0m failed, [33m0[0m skipped (5 total tests)

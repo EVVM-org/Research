@@ -1,0 +1,19 @@
+{
+  "name": "blockinvestigation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ethereumjs/rlp": "^4.0.0-beta.3",
+    "@ethereumjs/trie": "^5.0.0-beta.3",
+    "ethereum-cryptography": "^1.1.2",
+    "request": "^2.88.2"
+  }
+  
+}

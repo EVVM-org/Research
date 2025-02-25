@@ -1,0 +1,84 @@
+% Template:     Informe LaTeX
+% Documento:    Archivo principal
+% Versión:      8.3.2 (20/11/2023)
+% Codificación: UTF-8
+%
+% Autor: Pablo Pizarro R.
+%        pablo@ppizarror.com
+%
+% Manual template: [https://latex.ppizarror.com/informe]
+% Licencia MIT:    [https://opensource.org/licenses/MIT]
+
+% CREACIÓN DEL DOCUMENTO
+\documentclass[
+	spanish, % Idioma: spanish, english, etc.
+	letterpaper, oneside
+]{article}
+
+\usepackage{multicol}
+
+
+% INFORMACIÓN DEL DOCUMENTO
+\def\documenttitle {Mempool Node Providers}
+\def\documentsubtitle {}
+\def\documentsubject {El propósito de este documento es analizar los proveedores de datos disponibles que permitan tener un acceso completo al mempool de sus nodos en Ethereum Mainnet a fin de utilizarlos por nuestros Relayers (Fishers) a la hora de detectar transacciones de Roll a Mate.}
+
+\def\documentauthor {}
+\def\coursename {}
+\def\coursecode {\href{https://rollamate.io/}{\textit{rollamate.io}}}
+
+\def\universityname {\url{https://x.com/RollAMate}}
+\def\universityfaculty {}
+\def\universitydepartment {\url{https://rollamate.io}}
+\def\universitydepartmentimage {logo}
+\def\universitydepartmentimagecfg {height=1.57cm}
+\def\universitylocation {}
+
+\def\authortable {
+	\begin{tabular}{ll}
+		Autores:
+		& \begin{tabular}[t]{l}
+		      Jistro.eth\\
+                ariutokintumi.eth	
+		\end{tabular} \\
+            Ultima actualización:
+		& \begin{tabular}[t]{l}
+		      3 de Enero del 2024
+			
+		\end{tabular} \\
+
+
+  
+		
+	\end{tabular}
+}
+
+% IMPORTACIÓN DEL TEMPLATE
+\input{template}
+
+% INICIO DE PÁGINAS
+\begin{document}
+
+% PORTADA
+\templatePortrait
+
+% CONFIGURACIÓN DE PÁGINA Y ENCABEZADOS
+\templatePagecfg
+
+% RESUMEN O ABSTRACT
+%\begin{abstractd}
+	%El propósito de este documento es analizar los proveedores de datos disponibles que permitan tener un acceso completo al mempool de sus nodos en Ethereum Mainnet a fin de utilizarlos por nuestros Relayers (Fishers) a la hora de detectar transacciones de Roll a Mate.
+%\end{abstractd}
+
+% TABLA DE CONTENIDOS - ÍNDICE
+\templateIndex
+
+% CONFIGURACIONES FINALES
+\templateFinalcfg
+
+% ======================= INICIO DEL DOCUMENTO =======================
+
+\input{example} % Ejemplo, se puede borrar
+
+% FIN DEL DOCUMENTO
+\end{document}

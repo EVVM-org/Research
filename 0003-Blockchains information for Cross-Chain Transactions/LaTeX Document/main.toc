@@ -1,0 +1,7 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Blockchains information for Cross-Chain Transactions}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Transaction gas fee}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Transaction Per Second and Block Time Data}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Transaction Data After EIP-4844}{2}{subsection.1.3}%
+\contentsline {section}{\hspace *{-\tocsep }References}{4}{table.caption.5}%
+\contentsfinish 
